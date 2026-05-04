@@ -1,0 +1,70 @@
+# =========================
+# 🔧 PYTHON
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py3k
+
+# =========================
+# 🧠 VIRTUAL ENV (opcional)
+# =========================
+venv/
+.env/
+.env.local
+
+# =========================
+# 🏗 BUILD / DISTRIBUIÇÃO
+# =========================
+build/
+dist/
+*.egg-info/
+
+# PyInstaller
+*.spec
+
+# =========================
+# 🧪 TESTES / DEBUG
+# =========================
+.pytest_cache/
+coverage/
+*.log
+
+# =========================
+# 🧾 EDITORES / IDE
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# 📂 ARQUIVOS TEMPORÁRIOS
+# =========================
+*.tmp
+*.swp
+*.bak
+
+# arquivos temporários do ffmpeg / app
+temp_*.wav
+
+# =========================
+# 📁 SAÍDAS DO SISTEMA
+# =========================
+Transcriptos/
+Relatorios/
+
+# arquivos gerados
+*.txt
+*.pdf
+
+# =========================
+# 🖼️ MÍDIA / SCREENSHOTS
+# =========================
+screenshots/
+screenshots_*.png
+
+# =========================
+# ⚙️ SISTEMA OPERACIONAL
+# =========================
+.DS_Store
+Thumbs.db
