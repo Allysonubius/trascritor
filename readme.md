@@ -1,12 +1,8 @@
 # 🎬 TranscritorPro — Sistema de Transcrição de Vídeos
 
-
->
 > ![preview](https://transcri.io/img/visual/audio-transcription.svg)
 >
 > ![preview](image.png)
->
->
 
 ---
 
@@ -31,7 +27,7 @@ O sistema utiliza processamento local com extração de áudio via FFmpeg e tran
 
 ## ⚙️ Tecnologias Utilizadas
 
-* Python 3
+* Python **3.11**
 * Tkinter
 * FFmpeg (extração de áudio)
 * Torch (execução local)
@@ -40,12 +36,30 @@ O sistema utiliza processamento local com extração de áudio via FFmpeg e tran
 
 ---
 
+## ⚠️ Versão do Python (IMPORTANTE)
+
+Este projeto é compatível com:
+
+```bash
+Python 3.11
+```
+
+❌ Não recomendado:
+
+* Python 3.12+
+* Python 3.13+
+* Python 3.14 (incompatível com Torch / PyInstaller)
+
+---
+
 ## 📦 Instalação (SEM VENV)
 
-### 1. Instalar Python
+### 1. Instalar Python 3.11
 
 Baixe:
-👉 https://www.python.org/downloads/
+👉 https://www.python.org/downloads/release/python-3110/
+
+✔ Marque **Add Python to PATH**
 
 ---
 
@@ -57,21 +71,19 @@ Baixe:
 
 👉 https://www.gyan.dev/ffmpeg/builds/
 
-Baixe a versão:
+Versão:
 
-* **release full build**
+✔ **release full build**
 
 ---
 
 2. Extraia o arquivo `.zip`
 
-Exemplo:
-
 ```bash
 C:\ffmpeg
 ```
 
-A estrutura deve ficar assim:
+Estrutura:
 
 ```bash
 C:\ffmpeg\bin\ffmpeg.exe
@@ -81,40 +93,28 @@ C:\ffmpeg\bin\ffmpeg.exe
 
 3. Adicionar ao PATH
 
-### Passos:
-
-1. Pressione `Win + S`
-2. Pesquise: **Variáveis de Ambiente**
-3. Clique em: **Editar variáveis de ambiente do sistema**
-4. Clique em **Variáveis de Ambiente**
-5. Em **Path** → clique em **Editar**
-6. Clique em **Novo**
-7. Adicione:
+Adicionar:
 
 ```bash
 C:\ffmpeg\bin
 ```
 
-8. Clique em OK em tudo
-
 ---
 
 4. Testar instalação
-
-Abra o terminal e rode:
 
 ```bash
 ffmpeg -version
 ```
 
-Se aparecer informações do FFmpeg, está OK ✅
+✔ Se aparecer informações → OK
 
 ---
 
 ## 📦 3. Instalar dependências Python
 
 ```bash
-pip install torch faster-whisper reportlab ffmpeg-python
+py -3.11 -m pip install torch faster-whisper reportlab ffmpeg-python
 ```
 
 ---
@@ -122,39 +122,85 @@ pip install torch faster-whisper reportlab ffmpeg-python
 ## ▶️ Como Executar
 
 ```bash
-python nome_do_arquivo.py
+py -3.11 nome_do_arquivo.py
 ```
+
+---
+
+## 🎯 Precisão da Transcrição (CRÍTICO)
+
+Para obter transcrição fiel ao áudio:
+
+```python
+MODEL_SIZE = "large-v3"
+```
+
+---
+
+### 🧠 Por que usar o modelo máximo?
+
+✔ Maior precisão de fala
+✔ Melhor interpretação de contexto
+✔ Menos erros em palavras
+✔ Melhor pontuação automática
+✔ Melhor desempenho em áudios complexos
+
+---
+
+### ⚠️ Modelos menores geram inconsistência
+
+Modelos como:
+
+```bash
+medium / small / base / tiny
+```
+
+podem causar:
+
+❌ Troca de palavras
+❌ Frases sem sentido
+❌ Perda de contexto
+❌ Erros em nomes próprios
+
+👉 **Quanto menor o modelo, maior a perda de qualidade**
+
+---
+
+### 📌 Recomendação
+
+* Produção / uso sério → **large-v3 obrigatório**
+* Testes → medium ou small
 
 ---
 
 ## ⚡ Processamento (IMPORTANTE)
 
-O sistema utiliza **processamento bruto local**.
+O sistema utiliza **processamento pesado local**.
+
+---
 
 ### 🔹 CPU
 
 ✔ Funciona em qualquer máquina
-✔ Usa múltiplos núcleos (dependendo do modelo)
+✔ Mais estável
 
 ---
 
 ### 🔹 GPU NVIDIA (CUDA)
 
-Se houver GPU NVIDIA compatível:
-
-✔ Pode acelerar o processamento
-✔ Detectado automaticamente pelo sistema
+✔ Acelera MUITO o processamento
+✔ Detectado automaticamente
 
 ---
 
-### ⚠️ AMD (RX 7600, Ryzen, etc.)
+### ⚠️ AMD
 
 ❌ Não suporta CUDA
-✔ O sistema roda **somente via CPU**
+✔ Funciona via CPU
 
 ---
 
-### 🔧 Forçar CPU (opcional)
+### 🔧 Forçar CPU (recomendado)
 
 ```python
 DEVICE = "cpu"
@@ -163,19 +209,53 @@ COMPUTE_TYPE = "int8"
 
 ---
 
+## 💻 Requisitos de Hardware
+
+### 🔻 Mínimo (funciona)
+
+* CPU: 4 núcleos
+* RAM: 8 GB
+* SSD recomendado
+
+⚠️ Pode ser lento
+
+---
+
+### ⚖️ Recomendado
+
+* CPU: 6 a 8 núcleos
+* RAM: 16 GB
+* SSD obrigatório
+
+✔ Estável
+✔ Sem gargalo
+
+---
+
+### 🚀 Ideal (alto desempenho)
+
+* CPU: 8+ núcleos
+* RAM: 32 GB
+* SSD NVMe
+* GPU NVIDIA (RTX 3060+)
+
+✔ Processamento rápido
+✔ Uso total do `large-v3`
+
+---
+
 ## 📊 Performance
 
 Depende de:
 
-* Processador (Ryzen 7 / Ryzen 9 → ótimo)
-* Tamanho do modelo
-* Tamanho do vídeo
+* CPU (principal fator)
+* RAM
+* Modelo usado
+* Duração do vídeo
 
 ---
 
 ## 📁 Saída dos Arquivos
-
-Para cada vídeo:
 
 ```bash
 /video_nome/
@@ -187,29 +267,27 @@ Para cada vídeo:
 
 ## 🧪 Fluxo de Uso
 
-1. Clique em **Selecionar Pasta**
-2. Marque os arquivos
-3. Clique em **Iniciar**
-4. Acompanhe o progresso
+1. Selecionar pasta
+2. Marcar arquivos
+3. Iniciar
+4. Acompanhar progresso
 5. Resultado salvo automaticamente
 
 ---
 
 ## ❌ Cancelamento
 
-Ao cancelar:
-
-* Processamento interrompido
-* Checkboxes desmarcados
-* Interface limpa
+✔ Interrompe execução
+✔ Limpa interface
+✔ Reseta estado
 
 ---
 
 ## 🧼 Comportamento
 
 ✔ Limpa transcrição ao trocar vídeo
-✔ Evita reprocessar arquivos já feitos
-✔ Processamento por partes (mais estável)
+✔ Evita reprocessamento
+✔ Processamento em partes
 
 ---
 
@@ -217,34 +295,36 @@ Ao cancelar:
 
 ### ❌ FFmpeg não funciona
 
-✔ Verifique se está em:
+✔ Verifique:
 
 ```bash
 C:\ffmpeg\bin
 ```
 
-✔ Verifique PATH corretamente
+---
+
+### ❌ Aplicação fecha (.exe)
+
+✔ Use Python 3.11
+✔ Evite `--onefile` com torch
+✔ Use modelo menor para teste
 
 ---
 
 ### ❌ Lento
 
-✔ Use modelo menor
-✔ CPU é o principal fator
-
----
-
-## 📌 Configuração recomendada
-
-```python
-MODEL_SIZE = "medium"
-```
+✔ Normal com `large-v3`
+✔ Depende do hardware
 
 ---
 
 ## 👨‍💻 Observação Final
 
-Este sistema roda totalmente local, sem dependência de serviços externos, utilizando processamento direto da máquina.
+O sistema prioriza:
+
+👉 **PRECISÃO acima de velocidade**
+
+Processamento mais lento é esperado ao usar modelos maiores.
 
 ---
 
