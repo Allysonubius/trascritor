@@ -4,6 +4,10 @@
 >
 > ![preview](https://transcri.io/img/visual/audio-transcription.svg)
 >
+> ![preview](image.png)
+>
+>
+
 ---
 
 ## 📌 Sobre o Projeto
