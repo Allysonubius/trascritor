@@ -19,7 +19,9 @@ venv/
 # =========================
 build/
 dist/
-*.egg-info/
+*.egg-info
+vosk-model-*
+*.zip
 
 # PyInstaller
 *.spec
